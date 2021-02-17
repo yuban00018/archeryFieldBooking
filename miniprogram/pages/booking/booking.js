@@ -40,6 +40,12 @@ Page({
     });
   },
   submitForm() {
+    if (!this.data.isAgree) {
+      this.setData({
+        error: '请同意条款后继续'
+      });
+      return;
+    }
     this.selectComponent('#form').validate((valid, errors) => {
       //console.log('valid', valid, errors)
       if (!valid) {
