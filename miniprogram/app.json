@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/test/test",
+    "pages/myBookings/myBookings",
+    "pages/booking/booking",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",

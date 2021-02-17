@@ -55,10 +55,17 @@
     </navigator>
   </view>
 
-<!-- 测试页面 -->
+<!-- 预约页面 -->
 <view class="uploader">
-  <navigator url="../test/test" open-type="navigate" class="uploader-text">
-    <text>测试</text>
+  <navigator url="../booking/booking" open-type="navigate" class="uploader-text">
+    <text>预约</text>
+  </navigator>
+</view>
+
+<!-- 已预约界面 -->
+<view class="uploader">
+  <navigator url="../myBookings/myBookings" open-type="navigate" class="uploader-text">
+    <text>我的预约</text>
   </navigator>
 </view>
 </view>
