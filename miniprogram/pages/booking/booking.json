@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "日期选择",
+  "navigationBarTitleText": "选择预约日期",
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mp-checkbox": "weui-miniprogram/checkbox/checkbox",

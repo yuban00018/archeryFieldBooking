@@ -1,66 +1,47 @@
 // pages/myBookings/myBookings.js
+const db = wx.cloud.database()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
+    bookingDates: [{
+      'date': '2020-01-02'
+    }, {
+      'date': '2020-02-02'
+    }, {
+      'date': '2020-03-02'
+    }]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      slideButtons: [{
+        text: '详情',
+        src: '../../../pages/myBookings/info.png'
+      }, {
+        type: 'warn',
+        text: '删除',
+        src: '../../../pages/myBookings/delete.png'
+      }],
+    });
+    //从数据库获得预约记录
+    let tmp = []
+    db.collection('booking').where({
+      _openid: getApp().globalData.openid
+    }).get().then(res => {
+      for(var i=0;i<res.data.length;i++)
+      {
+        tmp.push({'date':res.data[i].bookingDate})
+      }
+      this.setData({
+        bookingDates:tmp
+      })
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  slideButtonTap(e) {
+    console.log('slide button tap', e.detail)
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

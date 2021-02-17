@@ -1,2 +1,10 @@
 <!--pages/myBookings/myBookings.wxml-->
-<text>pages/myBookings/myBookings.wxml</text>
+<view class="page">
+  <view wx:for="{{bookingDates}}" class="weui-cells">
+    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+      <view class="weui-cell">
+        {{item.date}}
+      </view>
+    </mp-slideview>
+  </view>
+</view>
