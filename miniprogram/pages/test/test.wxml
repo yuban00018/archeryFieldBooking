@@ -1,0 +1,25 @@
+<view>
+  <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells title="选择日期(仅限周末)">
+      <mp-cell prop="date" title="日期" ext-class="">
+        <picker data-field="date" mode="date" value="{{chosen_date}}" start="{{chosen_date}}" end="{{end_date}}"
+          bindchange="bindDateChange">
+          <view class="weui-input">{{chosen_date}}</view>
+        </picker>
+      </mp-cell>
+    </mp-cells>
+    <mp-cell>
+    <checkbox-group style="display:flex;" bindchange="bindAgreeChange">
+          <checkbox value="agree" checked="{{isAgree}}" />
+          <text style="color:#7b7b7b;">阅读并同意</text><navigator style="color:#007aff;" url="" class="weui-agree__link">《射艺场馆使用》</navigator>
+    </checkbox-group>
+    </mp-cell>
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
+    </view>
+
+  </mp-form>
+</view>
