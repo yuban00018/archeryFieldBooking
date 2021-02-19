@@ -5,43 +5,70 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bookingDates: [{
-      'date': '2020-01-02'
-    }, {
-      'date': '2020-02-02'
-    }, {
-      'date': '2020-03-02'
-    }]
+    bookingDates: [],
+    show: false,
+    deleteDate: '',
+    deleteId: '',
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      slideButtons: [{
-        text: '详情',
-        src: '../../../pages/myBookings/info.png'
-      }, {
-        type: 'warn',
-        text: '删除',
-        src: '../../../pages/myBookings/delete.png'
-      }],
-    });
     //从数据库获得预约记录
     let tmp = []
     db.collection('booking').where({
       _openid: getApp().globalData.openid
     }).get().then(res => {
-      for(var i=0;i<res.data.length;i++)
-      {
-        tmp.push({'date':res.data[i].bookingDate})
+      console.log(res)
+      for (var i = 0; i < res.data.length; i++) {
+        tmp.push({
+          'date': res.data[i].bookingDate,
+          'bookingId': res.data[i]._id
+        })
       }
       this.setData({
-        bookingDates:tmp
+        bookingDates: tmp
       })
+      console.log(this.data.bookingDates)
+    })
+  },
+  showDetail(e) {
+    wx.navigateTo({
+      url: '../BookingDetails/BookingDetails?bookingId='+e
+    })
+  },
+  deleteBooking(e) {
+    if (e.detail.item.value == 0) {
+      console.log('取消删除')
+      this.setData({
+        show: false
+      });
+      return;
+    }
+    console.log('确认删除')
+    db.collection('booking').where({
+      _id: this.data.deleteId
+    }).remove().then(res => {
+      this.onLoad()
+      this.setData({
+        show: false
+      });
+      wx.showToast({
+        title: '取消成功'
+      })
+    }).catch(err => {
+    })
+  },
+  showConfirm(deleteDate, bookingId) {
+    this.setData({
+      show: true,
+      deleteDate: deleteDate,
+      deleteId: bookingId
     })
   },
   slideButtonTap(e) {
-    console.log('slide button tap', e.detail)
+    console.log('slide button tap', e)
+    if (e.detail.index == 0) this.showDetail(e.detail.data.bookingId);
+    else this.showConfirm(e.detail.data.date, e.detail.data.bookingId); //this.deleteBooking(e.detail.data.bookingId);
   },
 })

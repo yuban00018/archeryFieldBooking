@@ -1,0 +1,16 @@
+#QRCode{
+  background:#fff;
+  width: 200px;
+  height: 200px;
+}
+page{
+  display:flex;
+  align-items: center;
+  height: 100%;
+}
+#title{
+  font-size:30px;
+  align-items: center;
+  text-align: center;
+  font-weight: lighter;
+}

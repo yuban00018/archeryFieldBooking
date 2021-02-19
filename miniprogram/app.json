@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/BookingDetails/BookingDetails",
     "pages/myBookings/myBookings",
     "pages/booking/booking",
     "pages/userConsole/userConsole",
@@ -27,5 +28,10 @@
   "style": "v2",
   "useExtendedLib": {
     "weui": true
+  },
+  "permissions": {
+    "openapi": [
+      "templateMessage.send"
+    ]
   }
 }

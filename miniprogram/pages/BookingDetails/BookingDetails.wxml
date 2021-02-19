@@ -1,0 +1,4 @@
+<page>
+    <view id="title">预约码</view>
+    <canvas id="QRCode" class="canvas-code" canvas-id="myQrcode"/>
+</page>

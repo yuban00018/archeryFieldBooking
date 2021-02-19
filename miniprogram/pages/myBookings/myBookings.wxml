@@ -1,10 +1,20 @@
 <!--pages/myBookings/myBookings.wxml-->
 <view class="page">
-  <view wx:for="{{bookingDates}}" class="weui-cells">
-    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+  <view wx:for="{{bookingDates}}" wx:key="item.date" class="weui-cells">
+    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap"
+      buttons="{{[{src: '../../../pages/myBookings/info.png',data: item},{src: '../../../pages/myBookings/delete.png',data: item}]}}">
       <view class="weui-cell">
         {{item.date}}
       </view>
     </mp-slideview>
   </view>
+  <mp-half-screen-dialog 
+  bindbuttontap="deleteBooking" 
+  show="{{show}}" 
+  maskClosable="{{false}}" 
+  title="确认信息"
+  desc="确认要取消{{deleteDate}}日的预约吗？"
+  buttons="{{[{type: 'default',text: '取消',value: 0},{type: 'primary',text: '确认',value:1}]}}">
+  </mp-half-screen-dialog>
+
 </view>
