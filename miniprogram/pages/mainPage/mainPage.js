@@ -37,10 +37,11 @@ Page({
                   isAdmin: true
                 }).get().then(res => {
                   console.log(res)
-                  if (res.data.length != 0) {this.setData({
-                    isAdmin: true
-                  });}
-                  else {
+                  if (res.data.length != 0) {
+                    this.setData({
+                      isAdmin: true
+                    });
+                  } else {
                     this.setData({
                       isAdmin: false
                     });
@@ -87,7 +88,7 @@ Page({
     if (this.data.mode1) {
       db.collection('scores').add({
         data: {
-          date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
+          date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
           Groups: [parseInt(this.data.formData.group1), parseInt(this.data.formData.group2), parseInt(this.data.formData.group3), parseInt(this.data.formData.group4)],
           totalScore: parseInt(this.data.formData.group1) + parseInt(this.data.formData.group2) + parseInt(this.data.formData.group3) + parseInt(this.data.formData.group4),
           type: this.data.multiArray[0][this.data.multiIndex[0]],
@@ -107,7 +108,7 @@ Page({
     } else {
       db.collection('scores').add({
         data: {
-          date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
+          date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
           Groups: [parseInt(this.data.formData.group1), parseInt(this.data.formData.group2)],
           totalScore: parseInt(this.data.formData.group1) + parseInt(this.data.formData.group2),
           type: this.data.multiArray[0][this.data.multiIndex[0]],
