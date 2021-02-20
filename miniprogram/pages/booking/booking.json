@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "选择预约日期",
+  "navigationBarTitleText": "预约靶位",
   "usingComponents": {
     "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mp-checkbox": "weui-miniprogram/checkbox/checkbox",

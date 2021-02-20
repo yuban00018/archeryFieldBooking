@@ -2,7 +2,6 @@
   "pages": [
     
     "pages/mainPage/mainPage",
-    "pages/index/index",
     "pages/scores/scores",
     "pages/scan/scan",
     "pages/BookingDetails/BookingDetails",

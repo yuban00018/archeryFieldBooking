@@ -84,9 +84,9 @@ Page({
    */
   onLoad: function (options) {
     this.getdate();
-    console.log("当前日期：" + this.data.currentdate);
     //从数据库获得预约记录
     let tmp = []
+    console.log(this.data.currentdate)
     db.collection('booking').where({
       bookingDate: this.data.currentdate
     }).get().then(res => {
