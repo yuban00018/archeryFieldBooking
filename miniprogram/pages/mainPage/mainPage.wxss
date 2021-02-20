@@ -1,0 +1,35 @@
+/* pages/mainPage/mainPage.wxss */
+
+.userinfo {
+  padding-left: 2%;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+}
+
+.userinfo-avatar[size] {
+  width: 100rpx;
+}
+
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.userinfo-nickname {
+  font-size: 35rpx;
+  background-color: white;
+  background-size: cover;
+  color:black;
+  text-align: left;
+}
+
+.userinfo-nickname-wrapper {
+  flex: 1;
+}

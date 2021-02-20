@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "射艺场预约系统",
+  "usingComponents": {
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
+  }
+}

@@ -3,9 +3,9 @@
   <view wx:for="{{bookingDates}}" wx:key="item.date" class="weui-cells">
     <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap"
       buttons="{{[{src: '../../../pages/myBookings/info.png',data: item},{src: '../../../pages/myBookings/delete.png',data: item}]}}">
-      <view class="weui-cell">
-        {{item.date}}
-      </view>
+      <mp-cell>
+        {{item.date}}<view slot="footer">{{item.state}}</view>
+      </mp-cell>
     </mp-slideview>
   </view>
   <mp-half-screen-dialog 

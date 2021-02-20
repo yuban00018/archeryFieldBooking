@@ -1,0 +1,62 @@
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<!--
+<view class="userinfo">
+  <view class="userinfo-avatar" style="background-image: url({{avatarUrl}})" size="default"></view>
+  <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+</view>
+-->
+<mp-cells ext-class="my-cells" title="个人功能">
+  <!-- 预约页面 -->
+  <mp-cell>
+    <navigator url="../booking/booking" open-type="navigate">
+      <text>预约靶位</text>
+    </navigator>
+  </mp-cell>
+
+  <!-- 我的预约界面 -->
+  <mp-cell>
+    <navigator url="../myBookings/myBookings" open-type="navigate">
+      <text>我的预约</text>
+    </navigator>
+  </mp-cell>
+
+  <mp-cell>
+    <navigator url="../scores/scores" open-type="navigate">
+      <text>我的成绩</text>
+    </navigator>
+  </mp-cell>
+</mp-cells>
+<mp-cells wx:if="{{isAdmin}}" ext-class="my-cells" title="管理员功能">
+  <!-- 签到界面 -->
+  <mp-cell wx:if="{{isAdmin}}">
+    <navigator url="../scan/scan" open-type="navigate">
+      <text>预约确认</text>
+    </navigator>
+  </mp-cell>
+</mp-cells>
+<mp-cells ext-class="my-cells" title="快速记录">
+  <!-- 成绩记录界面 -->
+  <mp-cell>
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="picker">
+        <view>弓箭类别：{{multiArray[0][multiIndex[0]]}}</view>
+        <view>射矩：{{multiArray[1][multiIndex[1]]}}</view>
+        <view>组数：{{multiArray[2][multiIndex[2]]}}</view>
+      </view>
+    </picker>
+  </mp-cell>
+  <mp-cell>
+    <input bindinput="formInputChange" type="number" data-field="group1" class="weui-input" placeholder="第1组成绩" />
+  </mp-cell>
+  <mp-cell>
+    <input bindinput="formInputChange" type="number" data-field="group2" class="weui-input" placeholder="第2组成绩" />
+  </mp-cell>
+  <mp-cell wx:if="{{mode1}}">
+    <input bindinput="formInputChange" type="number" data-field="group3" class="weui-input" placeholder="第3组成绩" />
+  </mp-cell>
+  <mp-cell wx:if="{{mode1}}">
+    <input bindinput="formInputChange" type="number" data-field="group4" class="weui-input" placeholder="第4组成绩" />
+  </mp-cell>
+</mp-cells>
+<!--成绩上传-->
+<button style="margin-top:20rpx;" bindtap="uploadScore" type="primary">上传成绩</button>

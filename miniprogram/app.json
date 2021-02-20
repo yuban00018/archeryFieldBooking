@@ -1,21 +1,13 @@
 {
   "pages": [
+    
+    "pages/mainPage/mainPage",
     "pages/index/index",
+    "pages/scores/scores",
+    "pages/scan/scan",
     "pages/BookingDetails/BookingDetails",
     "pages/myBookings/myBookings",
-    "pages/booking/booking",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"
+    "pages/booking/booking"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

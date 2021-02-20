@@ -1,0 +1,22 @@
+<!--pages/scores/scores.wxml-->
+<view class="page">
+  <mp-cell style="font-weight:bold">成绩表</mp-cell>
+  <mp-cells wx:for="{{scoreList}}" wx:key="item.date">
+    <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap">
+      <mp-cell>{{item.date}} {{item.type}}<view slot="footer">{{item.totalScore}}</view>
+      </mp-cell>
+      <mp-cell>{{item.range}} {{item.groupNumber}}
+      </mp-cell>
+      <view style="display:flex;">
+        <mp-cell>组一：{{item.Groups[0]}}
+        </mp-cell>
+        <mp-cell>组二：{{item.Groups[0]}}
+        </mp-cell>
+        <mp-cell wx:if="{{item.mode1}}">组三：{{item.Groups[0]}}
+        </mp-cell>
+        <mp-cell wx:if="{{item.mode1}}">组四：{{item.Groups[0]}}
+        </mp-cell>
+      </view>
+    </mp-slideview>
+  </mp-cells>
+</view>

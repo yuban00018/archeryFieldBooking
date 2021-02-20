@@ -1,0 +1,11 @@
+<!--pages/scan/scan.wxml-->
+<view class="page">
+    <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+    <mp-cell style="font-weight:bold">预约人列表<view slot="footer">签到状态</view>
+    </mp-cell>
+    <mp-cells wx:for="{{userList}}" wx:key="item.name">
+        <mp-cell>{{item.name}}<view slot="footer">{{item.state}}</view>
+        </mp-cell>
+    </mp-cells>
+    <button style="margin-top:50px;" bindtap="getQRCode" type="primary">扫描签到</button>
+</view>

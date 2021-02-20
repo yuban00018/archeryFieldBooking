@@ -23,7 +23,8 @@ Page({
       for (var i = 0; i < res.data.length; i++) {
         tmp.push({
           'date': res.data[i].bookingDate,
-          'bookingId': res.data[i]._id
+          'bookingId': res.data[i]._id,
+          'state': res.data[i].state
         })
       }
       this.setData({

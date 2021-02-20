@@ -10,6 +10,14 @@
         </picker>
       </mp-cell>
     </mp-cells>
+    <view class="weui-cells__title">预约人</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <input bindinput="formInputChange" id="form" class="weui-input" data-field="name" placeholder="请输入姓名" />
+                </view>
+            </view>
+        </view>
     <mp-cell>
     <checkbox-group style="display:flex;" bindchange="bindAgreeChange">
           <checkbox value="agree" checked="{{isAgree}}" />

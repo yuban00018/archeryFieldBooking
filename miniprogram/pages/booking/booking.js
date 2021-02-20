@@ -17,9 +17,22 @@ Page({
         required: true,
         message: '日期是必选项',
       }
+    },{
+      name: 'name',
+      rules:{
+        required: true,
+        message: '姓名是必选项',
+      }
     }],
   },
   computed: {},
+  formInputChange(e){
+    console.log(e)
+    const {field} = e.currentTarget.dataset
+            this.setData({
+                [`formData.${field}`]: e.detail.value
+            })
+  },
   onLoad: function () {
     console.log(getApp().globalData.openid)
     this.setData({
@@ -47,8 +60,8 @@ Page({
       return;
     }
     this.selectComponent('#form').validate((valid, errors) => {
-      //console.log('valid', valid, errors)
       if (!valid) {
+        console.log(errors)
         const firstError = Object.keys(errors)
         if (firstError.length) {
           this.setData({
@@ -56,35 +69,39 @@ Page({
           })
         }
       }
-    })
-    db.collection('booking').where({
-      bookingDate: this.data.chosen_date
-    }).get().then(res => {
-
-      db.collection('booking').where({
-        bookingDate: this.data.chosen_date,
-        _openid: getApp().globalData.openid
-      }).get().then(res2 => {
-        if (res2.data.length > 0) this.setData({
-          error: '只能预定一个靶位'
-        })
-        else if (res.data.length < 5) {
-          db.collection('booking').add({
-            data: {
-              bookingDate: this.data.chosen_date,
-              date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString()
-            }
-          }).then(
-            wx.showToast({
-              title: '预定成功'
+      else{
+        db.collection('booking').where({
+          bookingDate: this.data.formData.date
+        }).get().then(res => {
+    
+          db.collection('booking').where({
+            bookingDate: this.data.formData.date,
+            _openid: getApp().globalData.openid
+          }).get().then(res2 => {
+            if (res2.data.length > 0) this.setData({
+              error: '只能预定一个靶位'
             })
-          )
-        } else {
-          this.setData({
-            error: '当前时段预约已满'
+            else if (res.data.length < 5) {
+              db.collection('booking').add({
+                data: {
+                  bookingDate: this.data.formData.date,
+                  date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
+                  name:this.data.formData.name,
+                  state:'未签到'
+                }
+              }).then(
+                wx.showToast({
+                  title: '预定成功'
+                })
+              )
+            } else {
+              this.setData({
+                error: '当前时段预约已满'
+              })
+            }
           })
-        }
-      })
+        })
+      }
     })
   }
 })

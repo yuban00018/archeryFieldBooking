@@ -68,4 +68,11 @@
     <text>我的预约</text>
   </navigator>
 </view>
+
+<!-- 扫描界面 -->
+<view class="uploader">
+  <navigator url="../scan/scan" open-type="navigate" class="uploader-text">
+    <text>预约确认（管理员使用）</text>
+  </navigator>
+</view>
 </view>
