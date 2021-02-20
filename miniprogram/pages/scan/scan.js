@@ -22,7 +22,8 @@ Page({
     console.log(e)
     if (e.detail.index == 1) {
       db.collection('booking').where({
-        _openid: this.data.id
+        _openid: this.data.id,
+        bookingDate:this.data.currentdate
       }).update({
         data: {
           state: '已签到'
