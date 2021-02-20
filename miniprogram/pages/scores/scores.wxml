@@ -1,8 +1,10 @@
 <!--pages/scores/scores.wxml-->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 <view class="page">
-  <mp-cell style="font-weight:bold">成绩表</mp-cell>
+  <mp-cell style="font-weight:bold">成绩表<view slot="footer">总成绩</view></mp-cell>
   <mp-cells wx:for="{{scoreList}}" wx:key="item.date">
-    <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap">
+    <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap" icon="{{true}}"
+      buttons="{{[{src: '../../../pages/myBookings/delete.png',data: item}]}}">
       <mp-cell>{{item.date}} {{item.type}}<view slot="footer">{{item.totalScore}}</view>
       </mp-cell>
       <mp-cell>{{item.range}} {{item.groupNumber}}
@@ -10,13 +12,21 @@
       <view style="display:flex;">
         <mp-cell>组一：{{item.Groups[0]}}
         </mp-cell>
-        <mp-cell>组二：{{item.Groups[0]}}
+        <mp-cell>组二：{{item.Groups[1]}}
         </mp-cell>
-        <mp-cell wx:if="{{item.mode1}}">组三：{{item.Groups[0]}}
+        <mp-cell wx:if="{{item.mode1}}">组三：{{item.Groups[2]}}
         </mp-cell>
-        <mp-cell wx:if="{{item.mode1}}">组四：{{item.Groups[0]}}
+        <mp-cell wx:if="{{item.mode1}}">组四：{{item.Groups[3]}}
         </mp-cell>
       </view>
     </mp-slideview>
   </mp-cells>
+  <mp-half-screen-dialog 
+  bindbuttontap="deleteScore" 
+  show="{{show}}" 
+  maskClosable="{{false}}" 
+  title="确认信息"
+  desc="确认要删除该成绩吗？"
+  buttons="{{[{type: 'default',text: '取消',value: 0},{type: 'primary',text: '确认',value:1}]}}">
+  </mp-half-screen-dialog>
 </view>

@@ -26,9 +26,10 @@
     </navigator>
   </mp-cell>
 </mp-cells>
-<mp-cells wx:if="{{isAdmin}}" ext-class="my-cells" title="管理员功能">
+<!-- <mp-cells wx:if="{{isAdmin}}" ext-class="my-cells" title="管理员功能"> -->
+<mp-cells ext-class="my-cells" title="管理员功能">
   <!-- 签到界面 -->
-  <mp-cell wx:if="{{isAdmin}}">
+  <mp-cell>
     <navigator url="../scan/scan" open-type="navigate">
       <text>预约确认</text>
     </navigator>

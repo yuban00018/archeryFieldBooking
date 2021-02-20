@@ -6,9 +6,46 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    show:false,
   },
-
+  deleteScore(e){
+    if (e.detail.item.value == 0) {
+      console.log('取消删除')
+      this.setData({
+        show: false
+      });
+      return;
+    }
+    console.log('确认删除')
+    db.collection('scores').where({
+      _openid: getApp().globalData.openid,
+      date:this.data.deleteDate
+    }).remove().then(res => {
+      this.onLoad()
+      this.setData({
+        show: false
+      });
+      wx.showToast({
+        title: '删除成功'
+      })
+    }).catch(err => {
+      this.setData({
+        error:'删除失败，请检查网络'
+      })
+    })
+  },
+  confirmDelete(date){
+    console.log('call confirmDelete')
+    this.setData({
+      show: true,
+      deleteDate: date
+    })
+    console.log(this.data.show)
+  },
+  slideButtonTap(e) {
+    console.log('slide button tap', e)
+    if (e.detail.index == 0) this.confirmDelete(e.detail.data.date);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
