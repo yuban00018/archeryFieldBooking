@@ -39,7 +39,8 @@ Page({
       })
     } else {
       db.collection('booking').where({
-        _openid: this.data.id
+        _openid: this.data.id,
+        bookingDate:this.data.currentdate
       }).update({
         data: {
           state: '未出席'

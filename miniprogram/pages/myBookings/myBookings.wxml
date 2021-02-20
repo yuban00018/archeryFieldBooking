@@ -1,8 +1,9 @@
 <!--pages/myBookings/myBookings.wxml-->
 <view class="page">
+    <mp-cells ext-class="my-cells" title="左滑打开预约码或删除预约"></mp-cells>
   <view wx:for="{{bookingDates}}" wx:key="item.date" class="weui-cells">
     <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap"
-      buttons="{{[{src: '../../../pages/myBookings/info.png',data: item},{src: '../../../pages/myBookings/delete.png',data: item}]}}">
+      buttons="{{[{src: '../../../pages/myBookings/QR.png',data: item},{src: '../../../pages/myBookings/delete.png',data: item}]}}">
       <mp-cell>
         {{item.date}}<view slot="footer">{{item.state}}</view>
       </mp-cell>
