@@ -6,55 +6,127 @@ Page({
    * 页面的初始数据
    */
   data: {
-    error:'',
+    error: '',
     scanCodeMsg: "",
-    currentdate:"",
+    currentdate: "",
     userList: [],
     //next: false,
     showOneButtonDialog: false,
-    oneButton: [{text: '确定'}],
+    oneButton: [{
+      text: '确定'
+    }],
+    show: false,
+    id: ''
   },
-  
-  getQRCode: function(){
-    wx.scanCode({        //扫描API
-      onlyFromCamera: true,
-    }).then(res=>{
-      console.log(res);    //输出回调信息
+  setState(e) {
+    console.log(e)
+    if (e.detail.index == 1) {
+      db.collection('booking').where({
+        _openid: this.data.id
+      }).update({
+        data: {
+          state: '已签到'
+        }
+      }).then(res => {
+        wx.showToast({
+          title: '设置签到成功',
+        })
+        this.onLoad();
+      }).catch(err => {
         this.setData({
-          scanCodeMsg: res.result,
-        });
-        db.collection('booking').where({
-          _id:this.data.scanCodeMsg,
-          bookingDate:this.data.currentdate
-        }).get().then(res => {
-          if(res.data.length!=0){
+          error: '设置失败，请检查网络'
+        })
+      })
+    } else {
+      db.collection('booking').where({
+        _openid: this.data.id
+      }).update({
+        data: {
+          state: '未出席'
+        }
+      }).then(res => {
+        wx.showToast({
+          title: '设置未出席成功',
+        })
+        this.onLoad();
+      }).catch(err => {
+        this.setData({
+          error: '设置失败，请检查网络'
+        })
+      })
+    }
+  },
+  changeState(e) {
+    this.setData({
+      show: true,
+      id: e.detail.data._openid
+    })
+  },
+  changeState2(e) {
+    this.setData({
+      show: true,
+      id: e.currentTarget.dataset.gid._openid
+    })
+  },
+  ButtonTap(e){
+    console.log(e)
+    this.setData({
+      name: e.currentTarget.dataset.gid.name
+    })
+    this.changeState2(e);
+  },
+  slideButtonTap(e) {
+    console.log('slide button tap', e)
+    this.setData({
+      name: e.detail.data.name
+    })
+    if (e.detail.index == 0) this.changeState(e);
+  },
+  getQRCode: function () {
+    wx.scanCode({ //扫描API
+      onlyFromCamera: true,
+    }).then(res => {
+      console.log(res); //输出回调信息
+      this.setData({
+        scanCodeMsg: res.result,
+      });
+      db.collection('booking').where({
+        _id: this.data.scanCodeMsg,
+        bookingDate: this.data.currentdate
+      }).get().then(res => {
+        if (res.data.length != 0) {
           wx.showToast({
             title: '成功签到',
             duration: 2000
           })
           db.collection('booking').where({
-            _id:this.data.scanCodeMsg,
+            _id: this.data.scanCodeMsg,
           }).update({
             // data 传入需要局部更新的数据
             data: {
               // 表示将 done 字段置为 true
               state: '已签到'
             },
-            success: function(res) {
+            success: function (res) {
               console.log(res.data)
               this.onLoad();
             }
           })
-        }
-          else this.setData({
-            error: '当天无预约信息'
+        } else this.setData({
+          error: '当天无预约信息'
         })
-        }).catch(err=>{
-          console.log(err)
+      }).catch(err => {
+        this.setData({
+          error: '获取信息失败，请检查网络'
         })
-    }).catch(err=>{console.log(err)})
+      })
+    }).catch(err => {
+      this.setData({
+        error: '发生未知错误'
+      })
+    })
   },
-  getdate(){
+  getdate() {
     var date = new Date();
     //获取年  
     var Y = date.getFullYear();
@@ -64,21 +136,21 @@ Page({
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     var nowdate = Y + "-" + M + "-" + D;
     this.setData({
-      currentdate : nowdate
+      currentdate: nowdate
     })
   },
-  scanconfirm(a, b){
-    if(a == b){
+  scanconfirm(a, b) {
+    if (a == b) {
       this.setData({
         showOneButtonDialog: true
-    })
+      })
     }
   },
   tapDialogButton(e) {
     this.setData({
-        showOneButtonDialog: false
+      showOneButtonDialog: false
     })
-},
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -94,16 +166,17 @@ Page({
       for (var i = 0; i < res.data.length; i++) {
         tmp.push({
           '_openid': res.data[i]._openid,
-          'name':res.data[i].name,
-          'state':res.data[i].state
+          'name': res.data[i].name,
+          'state': res.data[i].state
         })
       }
       this.setData({
-        userList: tmp
+        userList: tmp,
+        show:false
       })
-      
+
     });
-    
+
   },
 
   /**

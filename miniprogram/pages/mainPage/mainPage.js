@@ -1,4 +1,5 @@
 // pages/mainPage/mainPage.js
+const date = new Date()
 const db = wx.cloud.database()
 Page({
 
@@ -86,7 +87,7 @@ Page({
     if (this.data.mode1) {
       db.collection('scores').add({
         data: {
-          date: new Date().toLocaleString(),
+          date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
           Groups: [parseInt(this.data.formData.group1), parseInt(this.data.formData.group2), parseInt(this.data.formData.group3), parseInt(this.data.formData.group4)],
           totalScore: parseInt(this.data.formData.group1) + parseInt(this.data.formData.group2) + parseInt(this.data.formData.group3) + parseInt(this.data.formData.group4),
           type: this.data.multiArray[0][this.data.multiIndex[0]],
@@ -106,7 +107,7 @@ Page({
     } else {
       db.collection('scores').add({
         data: {
-          date: new Date().toLocaleString(),
+          date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
           Groups: [parseInt(this.data.formData.group1), parseInt(this.data.formData.group2)],
           totalScore: parseInt(this.data.formData.group1) + parseInt(this.data.formData.group2),
           type: this.data.multiArray[0][this.data.multiIndex[0]],

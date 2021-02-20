@@ -4,8 +4,19 @@
     <mp-cell style="font-weight:bold">预约人列表<view slot="footer">签到状态</view>
     </mp-cell>
     <mp-cells wx:for="{{userList}}" wx:key="item.name">
-        <mp-cell>{{item.name}}<view slot="footer">{{item.state}}</view>
+        <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap" icon="{{true}}"
+      buttons="{{[{src: '../../../pages/scan/info.png',data:item}]}}">
+        <mp-cell bindtap="ButtonTap" data-gid='{{item}}'>{{item.name}}<view slot="footer">{{item.state}}</view>
         </mp-cell>
+        </mp-slideview>
     </mp-cells>
     <button style="margin-top:50px;" bindtap="getQRCode" type="primary">扫描签到</button>
+<mp-half-screen-dialog 
+  bindbuttontap="setState" 
+  show="{{show}}" 
+  maskClosable="{{true}}" 
+  title="手动设置签到状态"
+  desc="您正在手动设置{{name}}的签到状态"
+  buttons="{{[{type: 'warn',text: '未出席',value: 0},{type: 'primary',text: '手动签到',value:1}]}}">
+  </mp-half-screen-dialog>
 </view>
