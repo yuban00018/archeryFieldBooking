@@ -1,4 +1,5 @@
 // Core code comes from https://github.com/davidshimjs/qrcodejs
+// 版权归属原作者所有
 var QRCode;
 
 (function () {
