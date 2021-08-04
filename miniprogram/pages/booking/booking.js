@@ -17,21 +17,23 @@ Page({
         required: true,
         message: '日期是必选项',
       }
-    },{
+    }, {
       name: 'name',
-      rules:{
+      rules: {
         required: true,
         message: '姓名是必选项',
       }
     }],
   },
   computed: {},
-  formInputChange(e){
+  formInputChange(e) {
     console.log(e)
-    const {field} = e.currentTarget.dataset
-            this.setData({
-                [`formData.${field}`]: e.detail.value
-            })
+    const {
+      field
+    } = e.currentTarget.dataset
+    this.setData({
+      [`formData.${field}`]: e.detail.value
+    })
   },
   onLoad: function () {
     console.log(getApp().globalData.openid)
@@ -68,12 +70,11 @@ Page({
             error: errors[firstError[0]].message
           })
         }
-      }
-      else{
+      } else {
         db.collection('booking').where({
           bookingDate: this.data.formData.date
         }).get().then(res => {
-    
+
           db.collection('booking').where({
             bookingDate: this.data.formData.date,
             _openid: getApp().globalData.openid
@@ -86,8 +87,8 @@ Page({
                 data: {
                   bookingDate: this.data.formData.date,
                   date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
-                  name:this.data.formData.name,
-                  state:'未签到'
+                  name: this.data.formData.name,
+                  state: '未签到'
                 }
               }).then(
                 wx.showToast({

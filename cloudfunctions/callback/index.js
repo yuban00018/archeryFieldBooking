@@ -9,7 +9,9 @@ cloud.init({
 exports.main = async (event, context) => {
   console.log(event)
 
-  const { OPENID } = cloud.getWXContext()
+  const {
+    OPENID
+  } = cloud.getWXContext()
 
   const result = await cloud.openapi.customerServiceMessage.send({
     touser: OPENID,

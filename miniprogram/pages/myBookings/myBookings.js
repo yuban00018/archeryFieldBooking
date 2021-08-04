@@ -35,7 +35,7 @@ Page({
   },
   showDetail(e) {
     wx.navigateTo({
-      url: '../BookingDetails/BookingDetails?bookingId='+e
+      url: '../BookingDetails/BookingDetails?bookingId=' + e
     })
   },
   deleteBooking(e) {
@@ -57,8 +57,7 @@ Page({
       wx.showToast({
         title: '取消成功'
       })
-    }).catch(err => {
-    })
+    }).catch(err => {})
   },
   showConfirm(deleteDate, bookingId) {
     this.setData({

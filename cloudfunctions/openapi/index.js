@@ -32,9 +32,13 @@ async function requestSubscribeMessage(event) {
 }
 
 async function sendSubscribeMessage(event) {
-  const { OPENID } = cloud.getWXContext()
+  const {
+    OPENID
+  } = cloud.getWXContext()
 
-  const { templateId } = event
+  const {
+    templateId
+  } = event
 
   const sendResult = await cloud.openapi.subscribeMessage.send({
     touser: OPENID,

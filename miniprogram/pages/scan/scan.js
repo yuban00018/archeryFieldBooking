@@ -23,7 +23,7 @@ Page({
     if (e.detail.index == 1) {
       db.collection('booking').where({
         _openid: this.data.id,
-        bookingDate:this.data.currentdate
+        bookingDate: this.data.currentdate
       }).update({
         data: {
           state: '已签到'
@@ -41,7 +41,7 @@ Page({
     } else {
       db.collection('booking').where({
         _openid: this.data.id,
-        bookingDate:this.data.currentdate
+        bookingDate: this.data.currentdate
       }).update({
         data: {
           state: '未出席'
@@ -70,7 +70,7 @@ Page({
       id: e.currentTarget.dataset.gid._openid
     })
   },
-  ButtonTap(e){
+  ButtonTap(e) {
     console.log(e)
     this.setData({
       name: e.currentTarget.dataset.gid.name
@@ -174,7 +174,7 @@ Page({
       }
       this.setData({
         userList: tmp,
-        show:false
+        show: false
       })
 
     });
