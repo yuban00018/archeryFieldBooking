@@ -6,7 +6,8 @@
 
 [张承](https://github.com/WinfredVito)
 
-[Tong]
+[Tong](https://github.com/CDTong)
 
 # 感谢
 [二维码生成脚本](https://github.com/davidshimjs/qrcodejs)的开发者[Sangmin,Shim](https://github.com/davidshimjs)
+

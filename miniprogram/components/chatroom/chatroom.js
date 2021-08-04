@@ -33,8 +33,8 @@ Component({
       this.properties.onGetUserInfo(e)
     },
 
-    getOpenID() { 
-      return this.properties.getOpenID() 
+    getOpenID() {
+      return this.properties.getOpenID()
     },
 
     mergeCommonCriteria(criteria) {
@@ -48,14 +48,19 @@ Component({
       this.try(async () => {
         await this.initOpenID()
 
-        const { envId, collection } = this.properties
+        const {
+          envId,
+          collection
+        } = this.properties
         this.db = wx.cloud.database({
           env: envId,
         })
         const db = this.db
         const _ = db.command
 
-        const { data: initList } = await db.collection(collection).where(this.mergeCommonCriteria()).orderBy('sendTimeTS', 'desc').get()
+        const {
+          data: initList
+        } = await db.collection(collection).where(this.mergeCommonCriteria()).orderBy('sendTimeTS', 'desc').get()
 
         console.log('init query chats', initList)
 
@@ -82,7 +87,9 @@ Component({
 
     async initWatch(criteria) {
       this.try(() => {
-        const { collection } = this.properties
+        const {
+          collection
+        } = this.properties
         const db = this.db
         const _ = db.command
 
@@ -157,7 +164,9 @@ Component({
           return
         }
 
-        const { collection } = this.properties
+        const {
+          collection
+        } = this.properties
         const db = this.db
         const _ = db.command
 
@@ -207,7 +216,10 @@ Component({
         count: 1,
         sourceType: ['album', 'camera'],
         success: async res => {
-          const { envId, collection } = this.properties
+          const {
+            envId,
+            collection
+          } = this.properties
           const doc = {
             _id: `${Math.random()}_${Date.now()}`,
             groupId: this.data.groupId,
@@ -252,7 +264,9 @@ Component({
             },
           })
 
-          uploadTask.onProgressUpdate(({ progress }) => {
+          uploadTask.onProgressUpdate(({
+            progress
+          }) => {
             this.setData({
               chats: this.data.chats.map(chat => {
                 if (chat._id === doc._id) {
@@ -293,9 +307,13 @@ Component({
 
     async onScrollToUpper() {
       if (this.db && this.data.chats.length) {
-        const { collection } = this.properties
+        const {
+          collection
+        } = this.properties
         const _ = this.db.command
-        const { data } = await this.db.collection(collection).where(this.mergeCommonCriteria({
+        const {
+          data
+        } = await this.db.collection(collection).where(this.mergeCommonCriteria({
           sendTimeTS: _.lt(this.data.chats[0].sendTimeTS),
         })).orderBy('sendTimeTS', 'desc').get()
         this.data.chats.unshift(...data.reverse())
@@ -307,7 +325,7 @@ Component({
       }
     },
 
-    async try(fn, title) {
+    async try (fn, title) {
       try {
         await fn()
       } catch (e) {

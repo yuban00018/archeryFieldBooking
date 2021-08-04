@@ -6,9 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show:false,
+    show: false,
   },
-  deleteScore(e){
+  deleteScore(e) {
     if (e.detail.item.value == 0) {
       console.log('取消删除')
       this.setData({
@@ -19,7 +19,7 @@ Page({
     console.log('确认删除')
     db.collection('scores').where({
       _openid: getApp().globalData.openid,
-      date:this.data.deleteDate
+      date: this.data.deleteDate
     }).remove().then(res => {
       this.onLoad()
       this.setData({
@@ -30,11 +30,11 @@ Page({
       })
     }).catch(err => {
       this.setData({
-        error:'删除失败，请检查网络'
+        error: '删除失败，请检查网络'
       })
     })
   },
-  confirmDelete(date){
+  confirmDelete(date) {
     console.log('call confirmDelete')
     this.setData({
       show: true,
@@ -55,7 +55,7 @@ Page({
       _openid: getApp().globalData.openid
     }).get().then(res => {
       console.log(res)
-      for (var i = res.data.length-1; i >=0; i--) {
+      for (var i = res.data.length - 1; i >= 0; i--) {
         tmp.push({
           'Groups': res.data[i].Groups,
           'date': res.data[i].date,
@@ -63,7 +63,7 @@ Page({
           'range': res.data[i].range,
           'totalScore': res.data[i].totalScore,
           'type': res.data[i].type,
-          'mode1':res.data[i].mode1,
+          'mode1': res.data[i].mode1,
         })
       }
       this.setData({
