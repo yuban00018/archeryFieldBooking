@@ -20,18 +20,34 @@
     </navigator>
   </mp-cell>
 
+  <!-- 我的成绩 -->
   <mp-cell>
     <navigator url="../scores/scores" open-type="navigate">
       <text>我的成绩</text>
     </navigator>
   </mp-cell>
+
+
+  <!-- 参与比赛界面 -->
+  <mp-cell>
+    <navigator url="../joinContests/joinContests" open-type="navigate">
+      <text>参与比赛</text>
+    </navigator>
+  </mp-cell>
 </mp-cells>
+
 <!-- <mp-cells wx:if="{{isAdmin}}" ext-class="my-cells" title="管理员功能"> -->
 <mp-cells ext-class="my-cells" title="管理员功能">
   <!-- 签到界面 -->
   <mp-cell>
     <navigator url="../scan/scan" open-type="navigate">
       <text>预约确认</text>
+    </navigator>
+  </mp-cell>
+  <!-- 比赛界面 -->
+  <mp-cell>
+    <navigator url="../createContests/createContests" open-type="navigate">
+      <text>发起比赛</text>
     </navigator>
   </mp-cell>
 </mp-cells>
