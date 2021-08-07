@@ -1,0 +1,19 @@
+<!--miniprogram/pages/joinContests/joinContests.wxml-->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<view class="page">
+  <mp-cell style="font-weight:bold">比赛表</mp-cell>
+  <mp-cells wx:for="{{scoreList}}" wx:key="item.date">
+    <!-- 'name': res.data[i].name,
+          'Bookingdate': res.data[i].bookingdate,
+          'groupNumber': res.data[i].groupNumber,
+          'range': res.data[i].range,
+          'type': res.data[i].type, -->
+    <mp-cell>{{item.name}} {{item.Bookingdate}}
+    </mp-cell>
+    <mp-cell>{{item.range}} {{item.groupNumber}} {{item.type}}
+    </mp-cell>
+  </mp-cells>
+  <mp-half-screen-dialog bindbuttontap="deleteScore" show="{{show}}" maskClosable="{{false}}" title="确认信息"
+    desc="确认要删除该成绩吗？" buttons="{{[{type: 'default',text: '取消',value: 0},{type: 'primary',text: '确认',value:1}]}}">
+  </mp-half-screen-dialog>
+</view>
