@@ -75,49 +75,50 @@ Page({
   },
   submitForm() {
     this.selectComponent('#form').validate((valid, errors) => {
-        if (!valid) {
-          console.log(errors)
-          const firstError = Object.keys(errors)
-          if (firstError.length) {
-            this.setData({
-              error: errors[firstError[0]].message
-            })
-            console.log(this.data.multiIndex)
-          }
-        } else {
-          db.collection("contests_info").add({
-            data: {
-              bookingDate: this.data.formData.date,
-              date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
-              name: this.data.formData.name,
-              state: '已发起',
-              type: this.data.multiArray[0][this.data.multiIndex[0]],
-              range: this.data.multiArray[1][this.data.multiIndex[1]],
-              groupNumber: this.data.multiArray[2][this.data.multiIndex[2]],
-            }
-          }).then(
-            wx.showToast({
-              title: '发起成功',
-              icon: 'none',
-              duration: 2000,
-              success: function () {
-                setTimeout(function () {
-                  wx.navigateTo({
-                    url: '../mainPage/mainPage',
-                  })
-                }, 2000);
-              }
-            }),
-          )
+      if (!valid) {
+        console.log(errors)
+        const firstError = Object.keys(errors)
+        if (firstError.length) {
+          this.setData({
+            error: errors[firstError[0]].message
+          })
+          console.log(this.data.multiIndex)
         }
-      })},
+      } else {
+        db.collection("contests_info").add({
+          data: {
+            bookingDate: this.data.formData.date,
+            date: date.getFullYear().toString() + '-' + (date.getMonth() < 9 ? '0'.toString() : '') + (date.getMonth() + 1).toString() + '-' + (date.getDate() < 10 ? '0'.toString() : '') + date.getDate().toString(),
+            name: this.data.formData.name,
+            state: '已发起',
+            type: this.data.multiArray[0][this.data.multiIndex[0]],
+            range: this.data.multiArray[1][this.data.multiIndex[1]],
+            groupNumber: this.data.multiArray[2][this.data.multiIndex[2]],
+          }
+        }).then(
+          wx.showToast({
+            title: '发起成功',
+            icon: 'none',
+            duration: 2000,
+            success: function () {
+              setTimeout(function () {
+                wx.navigateTo({
+                  url: '../mainPage/mainPage',
+                })
+              }, 2000);
+            }
+          }),
+        )
+      }
+    })
+  },
 
 
-      bindMultiPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-          multiIndex: e.detail.value
-        })
-      },
+  bindMultiPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      multiIndex: e.detail.value
+    })
+  },
 
 })
